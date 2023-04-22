@@ -24,18 +24,33 @@ GOVERNANCE_KEYWORDS = ["Board Diversity", "Board Independence", "Incentives", "C
                        "Data Protection", "Fair remuneration", "Independent Director", "Board of Directors", "Board Meeting",
                        "Committee"]
 
+# test
+PDF_PAGES_TO_INCLUDE = [
+    {"file_name": "LPLA US.pdf", "page_start": 33, "page_end":54},
+    {"file_name": "LOW US.pdf", "page_start": 5, "page_end":10},
+]
+
 OUTPUT_EXCEL_FILE_NAME = "!output.xlsx"
 LOG_FILE_NAME = "!logs.txt"
 
 
-def extract_pdf(file):
+def extract_pdf(file, file_params):
 
     reader = PdfReader(file)
 
     extracted_pages = []
-    for page in reader.pages:
-        page_data = page.extract_text()
-        extracted_pages.append(page_data)
+
+    if file_params is None:
+        for page in reader.pages:
+            page_data = page.extract_text()
+            extracted_pages.append(page_data)
+    else:
+        for index, page in enumerate(reader.pages):
+            if index+1 < file_params["page_start"] or index >= file_params["page_end"]:
+                continue
+            else:
+                page_data = page.extract_text()
+                extracted_pages.append(page_data)
 
     tokenized_page_list = []
     for page in extracted_pages:
@@ -92,11 +107,19 @@ if __name__ == '__main__':
     print(f"Job Starting: {len(files)} PDF files found\n")
     for file in files:
 
+        file_params = None
+        for idx, file_to_find in enumerate(PDF_PAGES_TO_INCLUDE):
+            if file_to_find["file_name"] == file:
+                file_params = file_to_find
+                break
+
+
+
         log_string = f"Scanning {file} ... "
         print(log_string, end="")
 
         try:
-            extracted_sentences = extract_pdf(file)
+            extracted_sentences = extract_pdf(file, file_params)
             sentences_count = len(extracted_sentences)
 
             sentences_list_with_ratings = []
@@ -239,7 +262,6 @@ if __name__ == '__main__':
                 f.write(log_string + "\n")
 
     #end of files loop
-
     try:
         df = pd.DataFrame(output_list, columns=["name_of_file", "total_sentences",
                                                 "E0","E1","E2","E3",
@@ -259,7 +281,3 @@ if __name__ == '__main__':
         f.write(f"\nJob finished: files processed={len(files)}, errors={error_counter} (ctrl+f search for 'error')")
 
     print(f"\nJob finished: files processed={len(files)}, errors={error_counter}")
-
-
-
-
