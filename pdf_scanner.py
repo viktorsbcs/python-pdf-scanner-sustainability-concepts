@@ -5,6 +5,7 @@ import pandas as pd
 
 from PyPDF2 import PdfReader
 from nltk import tokenize
+from currency_symbols import CurrencySymbols
 
 # Constants
 ENVIROMENTAL_KEYWORDS = ["Material", "Energy", "Water", "Biodiversity", "Emission", "Effluent", "Waste", "Climate",
@@ -27,8 +28,9 @@ GOVERNANCE_KEYWORDS = ["Board Diversity", "Board Independence", "Incentives", "C
 
 # test
 PDF_PAGES_TO_INCLUDE = [
+    {"file_name": "LOW US.pdf", "page_start": 5, "page_end": 10},
     {"file_name": "LPLA US.pdf", "page_start": 33, "page_end":54},
-    {"file_name": "LOW US.pdf", "page_start": 5, "page_end":10},
+    {"file_name": "LOW US.pdf", "page_start": 20, "page_end":30},
 ]
 
 OUTPUT_EXCEL_FILE_NAME = "!output.xlsx"
@@ -38,10 +40,29 @@ LOG_FILE_NAME = "!logs.txt"
 def extract_pdf(file, file_params):
 
     reader = PdfReader(file)
-
     extracted_pages = []
 
-    if file_params is None:
+    numbers_to_include = []
+    #excluding pages
+    for item in file_params:
+        page_start = item["page_start"]
+        page_end = item["page_end"]
+
+        numbers_to_include.extend(range(page_start, page_end+1))
+
+
+
+
+
+
+
+    # for page in reader.pages:
+    #     page_data = page.extract_text()
+    #     extracted_pages.append(page_data)
+
+
+
+    if not file_params:
         for page in reader.pages:
             page_data = page.extract_text()
             extracted_pages.append(page_data)
@@ -114,11 +135,11 @@ if __name__ == '__main__':
     print(f"Job Starting: {len(files)} PDF files found\n")
     for file in files:
 
-        file_params = None
-        for idx, file_to_find in enumerate(PDF_PAGES_TO_INCLUDE):
+        file_params = []
+        for file_to_find in PDF_PAGES_TO_INCLUDE:
             if file_to_find["file_name"] == file:
-                file_params = file_to_find
-                break
+                file_params.append(file_to_find)
+
 
 
 
