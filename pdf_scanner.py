@@ -14,15 +14,16 @@ ENVIROMENTAL_KEYWORDS = ["Material", "Energy", "Water", "Biodiversity", "Emissio
 SOCIAL_KEYWORDS = ["Employment", "Labor management", "Employee", "Health", "Safety", "Training", "Education",
                    "Diversity", "Woman management", "Equal opportunity", "Equal remuneration", "Employee grievance",
                    "Discrimination", "Freedom of association", "Collective bargaining", "Child labor", "Forced labor", "Compulsory labor",
-                   "Security", "Indigenous rights", "Human rights", "Public policy", "Corruption", "Anti-competitive behavior",
-                   "Compliance", "Society", "Impact society", "Local communities", "Labeling", "Marketing Communication",
+                   "Security", "Indigenous rights", "Human rights", "Public policy", "Corruption", "Anti-competitive behaviour",
+                   "Compliance", "Society", "Impact society", "Local communities", "Labelling", "Marketing Communication",
                    "Customer privacy", "Customer compliance", "Economic impact", "Procurement practices", "Pay Ratio",
-                   "Employee turnover", "Temporary worker", "Injury rate"]
+                   "Employee turnover", "Temporary worker", "Injury rate", "Labour"]
 
 GOVERNANCE_KEYWORDS = ["Board Diversity", "Board Independence", "Incentives", "Collective Bargaining", "Code of Conduct",
                        "Ethics", "Corruption", "Data Privacy", "ESG Reporting", "Disclosure practices", "External Assurance",
                        "Data Protection", "Fair remuneration", "Independent Director", "Board of Directors", "Board Meeting",
                        "Committee"]
+
 
 # test
 PDF_PAGES_TO_INCLUDE = [
@@ -73,6 +74,12 @@ def if_string_has_number(input_string):
     return any(char.isdigit() for char in input_string)
 
 def if_string_has_currency(input_string):
+
+    # input_string = "This is a test sentence Employment 50.45$sdfasdf"#vb
+    input_string =  re.sub('([+-]?(?=\.\d|\d)(?:\d+)?(?:\.?\d*))(?:[Ee]([+-]?\d+))?', r' \1 ', input_string)            #re.sub("[A-Za-z]+", lambda ele: " " + ele[0] + " ", input_string)
+
+    # for currency_name_shortened in MAJOR_CURRENCIES:
+    #     currency_symbol = CurrencySymbols.get_symbol(currency_name_shortened)
 
     currency_found = False
     found_currency_data = list(lexnlp.extract.en.money.get_money(input_string))
@@ -229,7 +236,7 @@ if __name__ == '__main__':
                 g3_total += 1 if sentence["G"] == 3 else 0
 
             output_row = {
-                "name_of_file": file,
+                "name_of_file": os.path.splitext(file)[0],
                 "total_sentences": sentences_count,
                 "E0": e0_total,
                 "E1": e1_total,
@@ -281,3 +288,7 @@ if __name__ == '__main__':
         f.write(f"\nJob finished: files processed={len(files)}, errors={error_counter} (ctrl+f search for 'error')")
 
     print(f"\nJob finished: files processed={len(files)}, errors={error_counter}")
+
+
+
+
