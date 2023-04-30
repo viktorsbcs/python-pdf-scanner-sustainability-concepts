@@ -379,6 +379,12 @@ def extract_pdf(file, file_params):
             else:
                 continue
 
+    extracted_pages = [page.replace("�",". ") for page in extracted_pages]
+    extracted_pages = [page.replace("◼", " . ") for page in extracted_pages]
+    extracted_pages = [page.replace(u'\xa0', u' ') for page in extracted_pages]
+    extracted_pages = [page.replace("▪", " . ") for page in extracted_pages]
+
+
     tokenized_page_list = []
     for page in extracted_pages:
         tokenized_page = tokenize.sent_tokenize(page)
@@ -576,7 +582,7 @@ if __name__ == '__main__':
 
             with open(LOG_FILE_NAME, 'a', encoding="UTF-8") as f:
                 f.write(log_string + "\n")
-        except:
+        except Exception as e:
             log_string += "error"
             print("error")
 
