@@ -356,6 +356,129 @@ PDF_PAGES_TO_INCLUDE = [
 OUTPUT_EXCEL_FILE_NAME = "!output.xlsx"
 LOG_FILE_NAME = "!logs.txt"
 
+LOG_E0 = "!log_e0.txt"
+LOG_E1 = "!log_e1.txt"
+LOG_E2 = "!log_e2.txt"
+LOG_E3 = "!log_e3.txt"
+
+LOG_S0 = "!log_s0.txt"
+LOG_S1 = "!log_s1.txt"
+LOG_S2 = "!log_s2.txt"
+LOG_S3 = "!log_s3.txt"
+
+LOG_G0 = "!log_g0.txt"
+LOG_G1 = "!log_g1.txt"
+LOG_G2 = "!log_g2.txt"
+LOG_G3 = "!log_g3.txt"
+
+LIST_OF_LOG_FILES = [LOG_E0,LOG_E1,LOG_E2,LOG_E3,
+                     LOG_S0,LOG_S1,LOG_S2,LOG_S3,
+                     LOG_G0,LOG_G1,LOG_G2,LOG_G3]
+
+def create_log_files():
+    with open(LOG_FILE_NAME, 'w', encoding="UTF-8") as f:
+        f.write("PDF Scanner job logs\n\n")
+
+    #Environmental Logs
+    with open(LOG_E0, 'w', encoding="UTF-8") as f: #vb
+        f.write("E0 Logs\n\n")
+
+    with open(LOG_E1, 'w', encoding="UTF-8") as f: #vb
+        f.write("E1 Logs\n\n")
+
+    with open(LOG_E2, 'w', encoding="UTF-8") as f: #vb
+        f.write("E2 Logs\n\n")
+
+    with open(LOG_E3, 'w', encoding="UTF-8") as f: #vb
+        f.write("E3 Logs\n\n")
+
+    #Social Logs
+    with open(LOG_S0, 'w', encoding="UTF-8") as f:  # vb
+        f.write("S0 Logs\n\n")
+
+    with open(LOG_S1, 'w', encoding="UTF-8") as f:  # vb
+        f.write("S1 Logs\n\n")
+
+    with open(LOG_S2, 'w', encoding="UTF-8") as f:  # vb
+        f.write("S2 Logs\n\n")
+
+    with open(LOG_S3, 'w', encoding="UTF-8") as f:  # vb
+        f.write("S3 Logs\n\n")
+
+    #Governance Logs
+    with open(LOG_G0, 'w', encoding="UTF-8") as f:  # vb
+        f.write("G0 Logs\n\n")
+
+    with open(LOG_G1, 'w', encoding="UTF-8") as f:  # vb
+        f.write("G1 Logs\n\n")
+
+    with open(LOG_G2, 'w', encoding="UTF-8") as f:  # vb
+        f.write("G2 Logs\n\n")
+
+    with open(LOG_G3, 'w', encoding="UTF-8") as f:  # vb
+        f.write("G3 Logs\n\n")
+
+
+def add_to_log_file(file_name, sentence):
+
+    # Environmental Logs
+    if(file_name == "E0"):
+        with open(LOG_E0, 'a', encoding="UTF-8") as f:  # vb
+            f.write(sentence + "\n\n")
+
+    if(file_name == "E1"):
+        with open(LOG_E1, 'a', encoding="UTF-8") as f:  # vb
+            f.write(sentence + "\n\n")
+
+    if(file_name == "E2"):
+        with open(LOG_E2, 'a', encoding="UTF-8") as f:  # vb
+            f.write(sentence + "\n\n")
+
+    if(file_name == "E3"):
+        with open(LOG_E3, 'a', encoding="UTF-8") as f:  # vb
+            f.write(sentence + "\n\n")
+
+    # Social Logs
+    if (file_name == "S0"):
+        with open(LOG_S0, 'a', encoding="UTF-8") as f:  # vb
+            f.write(sentence + "\n\n")
+
+    if (file_name == "S1"):
+        with open(LOG_S1, 'a', encoding="UTF-8") as f:  # vb
+            f.write(sentence + "\n\n")
+
+    if (file_name == "S2"):
+        with open(LOG_S2, 'a', encoding="UTF-8") as f:  # vb
+            f.write(sentence + "\n\n")
+
+    if (file_name == "S3"):
+        with open(LOG_S3, 'a', encoding="UTF-8") as f:  # vb
+            f.write(sentence + "\n\n")
+
+    # Governance Logs
+    if (file_name == "G0"):
+        with open(LOG_G0, 'a', encoding="UTF-8") as f:  # vb
+            f.write(sentence + "\n\n")
+
+    if (file_name == "G1"):
+        with open(LOG_G1, 'a', encoding="UTF-8") as f:  # vb
+            f.write(sentence + "\n\n")
+
+    if (file_name == "G2"):
+        with open(LOG_G2, 'a', encoding="UTF-8") as f:  # vb
+            f.write(sentence + "\n\n")
+
+    if (file_name == "G3"):
+        with open(LOG_G3, 'a', encoding="UTF-8") as f:  # vb
+            f.write(sentence + "\n\n")
+
+
+def add_to_all_log_files(sentence):
+    for file_name in LIST_OF_LOG_FILES:
+        with open(file_name, 'a', encoding="UTF-8") as f:  # vb
+            f.write(sentence + "\n\n")
+
+
 def extract_pdf(file, file_params):
 
     reader = PdfReader(file)
@@ -380,9 +503,17 @@ def extract_pdf(file, file_params):
                 continue
 
     extracted_pages = [page.replace("�",". ") for page in extracted_pages]
-    extracted_pages = [page.replace("◼", " . ") for page in extracted_pages]
+    extracted_pages = [page.replace("◼", ". ") for page in extracted_pages]
     extracted_pages = [page.replace(u'\xa0', u' ') for page in extracted_pages]
-    extracted_pages = [page.replace("▪", " . ") for page in extracted_pages]
+    extracted_pages = [page.replace("▪", ". ") for page in extracted_pages]
+    extracted_pages = [page.replace(" ", " ") for page in extracted_pages]
+    extracted_pages = [page.replace("•", ". ") for page in extracted_pages]
+    extracted_pages = [page.replace("►", ". ") for page in extracted_pages]
+    extracted_pages = [page.replace("|", ". ") for page in extracted_pages]
+    extracted_pages = [page.replace("N/A", " ") for page in extracted_pages]
+    extracted_pages = [page.replace("●", ". ") for page in extracted_pages]
+    extracted_pages = [page.replace("■", ". ") for page in extracted_pages]
+    extracted_pages = [page.replace("▶", ". ") for page in extracted_pages]
 
 
     tokenized_page_list = []
@@ -399,6 +530,8 @@ def extract_pdf(file, file_params):
         for sentence in page:
             file_sentences_list.append(sentence)
 
+
+
     return file_sentences_list
 
 def if_string_has_number(input_string):
@@ -406,7 +539,20 @@ def if_string_has_number(input_string):
 
 def if_string_has_currency(input_string):
 
-    input_string =  re.sub('([+-]?(?=\.\d|\d)(?:\d+)?(?:\.?\d*))(?:[Ee]([+-]?\d+))?', r' \1 ', input_string)
+    input_string = input_string.lower()
+    input_string = re.sub('([+-]?(?=\.\d|\d)(?:\d+)?(?:\.?\d*))(?:[Ee]([+-]?\d+))?', r' \1 ', input_string)
+    # input_string = input_string.replace("eurofins", " ")
+    # input_string = input_string.replace("eurazeo", " ")
+    # input_string = input_string.replace("european", " ")
+    input_string = input_string.replace("$ontent", "content")
+    input_string = input_string.replace("$'%", " ")
+
+    list_of_words = input_string.split() #vb
+    for i, word in enumerate(list_of_words):
+        if word[0: 3] == "eur" and len(word) > 3:
+            list_of_words[i] = re.sub("eur", "", word)
+
+    input_string = " ".join(list_of_words)
 
     currency_found = False
     found_currency_data = list(lexnlp.extract.en.money.get_money(input_string))
@@ -418,8 +564,7 @@ def if_string_has_currency(input_string):
 
 if __name__ == '__main__':
 
-    with open(LOG_FILE_NAME, 'w', encoding="UTF-8") as f:
-        f.write("PDF Scanner logs\n\n")
+    create_log_files()
 
     if os.path.exists(OUTPUT_EXCEL_FILE_NAME):
         try:
@@ -437,7 +582,7 @@ if __name__ == '__main__':
     error_counter = 0
 
     print(f"Job Starting: {len(files)} PDF files found\n")
-    for file in files:
+    for i,file in enumerate(files):
 
         file_params = []
         for file_to_find in PDF_PAGES_TO_INCLUDE:
@@ -445,8 +590,9 @@ if __name__ == '__main__':
                 file_params.append(file_to_find)
 
 
-        log_string = f"Scanning {file} ... "
+        log_string = f"{i+1}. Scanning {file} ... "
         print(log_string, end="")
+        add_to_all_log_files(log_string)
 
         try:
             extracted_sentences = extract_pdf(file, file_params)
@@ -483,12 +629,15 @@ if __name__ == '__main__':
 
                 if keywords_environmental_in_sentence == False:
                     item["E"] = 0
+                    add_to_log_file("E0", sentence)
 
                 if keywords_social_in_sentence == False:
                     item["S"] = 0
+                    add_to_log_file("S0", sentence)
 
                 if keywords_governance_in_sentence == False:
                     item["G"] = 0
+                    add_to_log_file("G0", sentence)
 
 
                 #if keyword accurance in sentance occured:
@@ -508,6 +657,8 @@ if __name__ == '__main__':
                     if string_has_number and string_has_currency:
                         item["E"] = 3
 
+                    add_to_log_file(f"E{item['E']}", sentence)
+
                 if keywords_social_in_sentence == True:
                     item["S"] = 1
 
@@ -517,6 +668,8 @@ if __name__ == '__main__':
                     if string_has_number and string_has_currency:
                         item["S"] = 3
 
+                    add_to_log_file(f"S{item['S']}", sentence)
+
                 if  keywords_governance_in_sentence == True:
                     item["G"] = 1
 
@@ -525,6 +678,8 @@ if __name__ == '__main__':
 
                     if string_has_number and string_has_currency:
                         item["G"] = 3
+
+                    add_to_log_file(f"G{item['G']}", sentence)
 
             e0_total = 0
             e1_total = 0
@@ -582,6 +737,7 @@ if __name__ == '__main__':
 
             with open(LOG_FILE_NAME, 'a', encoding="UTF-8") as f:
                 f.write(log_string + "\n")
+
         except Exception as e:
             log_string += "error"
             print("error")
