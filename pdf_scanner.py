@@ -371,12 +371,17 @@ LOG_G1 = "!log_g1.txt"
 LOG_G2 = "!log_g2.txt"
 LOG_G3 = "!log_g3.txt"
 
+LOG_SENTENCES_NOT_INCLUDED = "!log_sentences_not_included.txt"
+
 LIST_OF_LOG_FILES = [LOG_E0,LOG_E1,LOG_E2,LOG_E3,
                      LOG_S0,LOG_S1,LOG_S2,LOG_S3,
                      LOG_G0,LOG_G1,LOG_G2,LOG_G3]
 
 def create_log_files():
     with open(LOG_FILE_NAME, 'w', encoding="UTF-8") as f:
+        f.write("PDF Scanner job logs\n\n")
+
+    with open(LOG_SENTENCES_NOT_INCLUDED, 'w', encoding="UTF-8") as f:
         f.write("PDF Scanner job logs\n\n")
 
     #Environmental Logs
@@ -420,6 +425,12 @@ def create_log_files():
 
 
 def add_to_log_file(file_name, sentence):
+
+    sentence.encode('utf-8', 'replace').decode()
+
+    if(file_name == "SKIP"):
+        with open(LOG_SENTENCES_NOT_INCLUDED, 'a', encoding="UTF-8") as f:  # vb
+            f.write(sentence + "\n\n")
 
     # Environmental Logs
     if(file_name == "E0"):
@@ -474,10 +485,14 @@ def add_to_log_file(file_name, sentence):
 
 
 def add_to_all_log_files(sentence):
+    sentence.encode('utf-8', 'replace').decode()
+
     for file_name in LIST_OF_LOG_FILES:
         with open(file_name, 'a', encoding="UTF-8") as f:  # vb
             f.write(sentence + "\n\n")
 
+    with open(LOG_SENTENCES_NOT_INCLUDED, 'a', encoding="UTF-8") as f:  # vb
+        f.write(sentence + "\n\n")
 
 def extract_pdf(file, file_params):
 
@@ -514,7 +529,20 @@ def extract_pdf(file, file_params):
     extracted_pages = [page.replace("●", ". ") for page in extracted_pages]
     extracted_pages = [page.replace("■", ". ") for page in extracted_pages]
     extracted_pages = [page.replace("▶", ". ") for page in extracted_pages]
+    extracted_pages = [page.replace("★", ". ") for page in extracted_pages]
+    extracted_pages = [page.replace("▍", ". ") for page in extracted_pages]
+    extracted_pages = [page.replace(" N  ", ". ") for page in extracted_pages]
+    extracted_pages = [page.replace("\r", " ") for page in extracted_pages]
+    extracted_pages = [page.replace("\n", " ") for page in extracted_pages]
+    extracted_pages = [page.replace("\ud83c", " ") for page in extracted_pages]
+    extracted_pages = [page.replace("\udf32", " ") for page in extracted_pages]
+    extracted_pages = [page.replace("\udf33", " ") for page in extracted_pages]
+    extracted_pages = [page.replace("\udf31", " ") for page in extracted_pages]
 
+
+    for i,page in enumerate(extracted_pages):
+        if ". . . . . . . " in page:
+            extracted_pages[i] = page.replace(".", "")
 
     tokenized_page_list = []
     for page in extracted_pages:
@@ -657,6 +685,10 @@ if __name__ == '__main__':
                     if string_has_number and string_has_currency:
                         item["E"] = 3
 
+                    # if "" in sentence:
+                    #     add_to_log_file("SKIP", sentence)
+                    #     item["E"] = 1
+
                     add_to_log_file(f"E{item['E']}", sentence)
 
                 if keywords_social_in_sentence == True:
@@ -668,6 +700,10 @@ if __name__ == '__main__':
                     if string_has_number and string_has_currency:
                         item["S"] = 3
 
+                    # if "" in sentence:
+                    #     add_to_log_file("SKIP", sentence)
+                    #     item["S"] = 1
+
                     add_to_log_file(f"S{item['S']}", sentence)
 
                 if  keywords_governance_in_sentence == True:
@@ -678,6 +714,10 @@ if __name__ == '__main__':
 
                     if string_has_number and string_has_currency:
                         item["G"] = 3
+
+                    # if "" in sentence:
+                    #     add_to_log_file("SKIP", sentence)
+                    #     item["G"] = 1
 
                     add_to_log_file(f"G{item['G']}", sentence)
 
