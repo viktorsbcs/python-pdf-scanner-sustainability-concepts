@@ -15,3 +15,6 @@ pip install scikit-learn
 
 NLTK Tokenizer:
 https://www.nltk.org/_modules/nltk/tokenize/punkt.html
+
+NLTK Model:
+https://raw.githubusercontent.com/nltk/nltk_data/gh-pages/packages/tokenizers/punkt.zip
