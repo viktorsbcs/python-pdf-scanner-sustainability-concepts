@@ -385,42 +385,42 @@ def create_log_files():
         f.write("PDF Scanner job logs\n\n")
 
     #Environmental Logs
-    with open(LOG_E0, 'w', encoding="UTF-8") as f: #vb
+    with open(LOG_E0, 'w', encoding="UTF-8") as f:
         f.write("E0 Logs\n\n")
 
-    with open(LOG_E1, 'w', encoding="UTF-8") as f: #vb
+    with open(LOG_E1, 'w', encoding="UTF-8") as f:
         f.write("E1 Logs\n\n")
 
-    with open(LOG_E2, 'w', encoding="UTF-8") as f: #vb
+    with open(LOG_E2, 'w', encoding="UTF-8") as f:
         f.write("E2 Logs\n\n")
 
-    with open(LOG_E3, 'w', encoding="UTF-8") as f: #vb
+    with open(LOG_E3, 'w', encoding="UTF-8") as f:
         f.write("E3 Logs\n\n")
 
     #Social Logs
-    with open(LOG_S0, 'w', encoding="UTF-8") as f:  # vb
+    with open(LOG_S0, 'w', encoding="UTF-8") as f:
         f.write("S0 Logs\n\n")
 
-    with open(LOG_S1, 'w', encoding="UTF-8") as f:  # vb
+    with open(LOG_S1, 'w', encoding="UTF-8") as f:
         f.write("S1 Logs\n\n")
 
-    with open(LOG_S2, 'w', encoding="UTF-8") as f:  # vb
+    with open(LOG_S2, 'w', encoding="UTF-8") as f:
         f.write("S2 Logs\n\n")
 
-    with open(LOG_S3, 'w', encoding="UTF-8") as f:  # vb
+    with open(LOG_S3, 'w', encoding="UTF-8") as f:
         f.write("S3 Logs\n\n")
 
     #Governance Logs
-    with open(LOG_G0, 'w', encoding="UTF-8") as f:  # vb
+    with open(LOG_G0, 'w', encoding="UTF-8") as f:
         f.write("G0 Logs\n\n")
 
-    with open(LOG_G1, 'w', encoding="UTF-8") as f:  # vb
+    with open(LOG_G1, 'w', encoding="UTF-8") as f:
         f.write("G1 Logs\n\n")
 
-    with open(LOG_G2, 'w', encoding="UTF-8") as f:  # vb
+    with open(LOG_G2, 'w', encoding="UTF-8") as f:
         f.write("G2 Logs\n\n")
 
-    with open(LOG_G3, 'w', encoding="UTF-8") as f:  # vb
+    with open(LOG_G3, 'w', encoding="UTF-8") as f:
         f.write("G3 Logs\n\n")
 
 
@@ -429,58 +429,58 @@ def add_to_log_file(file_name, sentence):
     sentence.encode('utf-8', 'replace').decode()
 
     if(file_name == "SKIP"):
-        with open(LOG_SENTENCES_NOT_INCLUDED, 'a', encoding="UTF-8") as f:  # vb
+        with open(LOG_SENTENCES_NOT_INCLUDED, 'a', encoding="UTF-8") as f:
             f.write(sentence + "\n\n")
 
     # Environmental Logs
     if(file_name == "E0"):
-        with open(LOG_E0, 'a', encoding="UTF-8") as f:  # vb
+        with open(LOG_E0, 'a', encoding="UTF-8") as f:
             f.write(sentence + "\n\n")
 
     if(file_name == "E1"):
-        with open(LOG_E1, 'a', encoding="UTF-8") as f:  # vb
+        with open(LOG_E1, 'a', encoding="UTF-8") as f:
             f.write(sentence + "\n\n")
 
     if(file_name == "E2"):
-        with open(LOG_E2, 'a', encoding="UTF-8") as f:  # vb
+        with open(LOG_E2, 'a', encoding="UTF-8") as f:
             f.write(sentence + "\n\n")
 
     if(file_name == "E3"):
-        with open(LOG_E3, 'a', encoding="UTF-8") as f:  # vb
+        with open(LOG_E3, 'a', encoding="UTF-8") as f:
             f.write(sentence + "\n\n")
 
     # Social Logs
     if (file_name == "S0"):
-        with open(LOG_S0, 'a', encoding="UTF-8") as f:  # vb
+        with open(LOG_S0, 'a', encoding="UTF-8") as f:
             f.write(sentence + "\n\n")
 
     if (file_name == "S1"):
-        with open(LOG_S1, 'a', encoding="UTF-8") as f:  # vb
+        with open(LOG_S1, 'a', encoding="UTF-8") as f:
             f.write(sentence + "\n\n")
 
     if (file_name == "S2"):
-        with open(LOG_S2, 'a', encoding="UTF-8") as f:  # vb
+        with open(LOG_S2, 'a', encoding="UTF-8") as f:
             f.write(sentence + "\n\n")
 
     if (file_name == "S3"):
-        with open(LOG_S3, 'a', encoding="UTF-8") as f:  # vb
+        with open(LOG_S3, 'a', encoding="UTF-8") as f:
             f.write(sentence + "\n\n")
 
     # Governance Logs
     if (file_name == "G0"):
-        with open(LOG_G0, 'a', encoding="UTF-8") as f:  # vb
+        with open(LOG_G0, 'a', encoding="UTF-8") as f:
             f.write(sentence + "\n\n")
 
     if (file_name == "G1"):
-        with open(LOG_G1, 'a', encoding="UTF-8") as f:  # vb
+        with open(LOG_G1, 'a', encoding="UTF-8") as f:
             f.write(sentence + "\n\n")
 
     if (file_name == "G2"):
-        with open(LOG_G2, 'a', encoding="UTF-8") as f:  # vb
+        with open(LOG_G2, 'a', encoding="UTF-8") as f:
             f.write(sentence + "\n\n")
 
     if (file_name == "G3"):
-        with open(LOG_G3, 'a', encoding="UTF-8") as f:  # vb
+        with open(LOG_G3, 'a', encoding="UTF-8") as f:
             f.write(sentence + "\n\n")
 
 
@@ -488,10 +488,10 @@ def add_to_all_log_files(sentence):
     sentence.encode('utf-8', 'replace').decode()
 
     for file_name in LIST_OF_LOG_FILES:
-        with open(file_name, 'a', encoding="UTF-8") as f:  # vb
+        with open(file_name, 'a', encoding="UTF-8") as f:
             f.write(sentence + "\n\n")
 
-    with open(LOG_SENTENCES_NOT_INCLUDED, 'a', encoding="UTF-8") as f:  # vb
+    with open(LOG_SENTENCES_NOT_INCLUDED, 'a', encoding="UTF-8") as f:
         f.write(sentence + "\n\n")
 
 def extract_pdf(file, file_params):
@@ -569,13 +569,10 @@ def if_string_has_currency(input_string):
 
     input_string = input_string.lower()
     input_string = re.sub('([+-]?(?=\.\d|\d)(?:\d+)?(?:\.?\d*))(?:[Ee]([+-]?\d+))?', r' \1 ', input_string)
-    # input_string = input_string.replace("eurofins", " ")
-    # input_string = input_string.replace("eurazeo", " ")
-    # input_string = input_string.replace("european", " ")
     input_string = input_string.replace("$ontent", "content")
     input_string = input_string.replace("$'%", " ")
 
-    list_of_words = input_string.split() #vb
+    list_of_words = input_string.split() 
     for i, word in enumerate(list_of_words):
         if word[0: 3] == "eur" and len(word) > 3:
             list_of_words[i] = re.sub("eur", "", word)
