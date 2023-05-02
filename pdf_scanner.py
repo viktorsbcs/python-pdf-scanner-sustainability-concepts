@@ -354,145 +354,6 @@ PDF_PAGES_TO_INCLUDE = [
 ]
 
 OUTPUT_EXCEL_FILE_NAME = "!output.xlsx"
-LOG_FILE_NAME = "!logs.txt"
-
-LOG_E0 = "!log_e0.txt"
-LOG_E1 = "!log_e1.txt"
-LOG_E2 = "!log_e2.txt"
-LOG_E3 = "!log_e3.txt"
-
-LOG_S0 = "!log_s0.txt"
-LOG_S1 = "!log_s1.txt"
-LOG_S2 = "!log_s2.txt"
-LOG_S3 = "!log_s3.txt"
-
-LOG_G0 = "!log_g0.txt"
-LOG_G1 = "!log_g1.txt"
-LOG_G2 = "!log_g2.txt"
-LOG_G3 = "!log_g3.txt"
-
-LOG_SENTENCES_NOT_INCLUDED = "!log_sentences_not_included.txt"
-
-LIST_OF_LOG_FILES = [LOG_E0,LOG_E1,LOG_E2,LOG_E3,
-                     LOG_S0,LOG_S1,LOG_S2,LOG_S3,
-                     LOG_G0,LOG_G1,LOG_G2,LOG_G3]
-
-def create_log_files():
-    with open(LOG_FILE_NAME, 'w', encoding="UTF-8") as f:
-        f.write("PDF Scanner job logs\n\n")
-
-    with open(LOG_SENTENCES_NOT_INCLUDED, 'w', encoding="UTF-8") as f:
-        f.write("PDF Scanner job logs\n\n")
-
-    #Environmental Logs
-    with open(LOG_E0, 'w', encoding="UTF-8") as f: #vb
-        f.write("E0 Logs\n\n")
-
-    with open(LOG_E1, 'w', encoding="UTF-8") as f: #vb
-        f.write("E1 Logs\n\n")
-
-    with open(LOG_E2, 'w', encoding="UTF-8") as f: #vb
-        f.write("E2 Logs\n\n")
-
-    with open(LOG_E3, 'w', encoding="UTF-8") as f: #vb
-        f.write("E3 Logs\n\n")
-
-    #Social Logs
-    with open(LOG_S0, 'w', encoding="UTF-8") as f:  # vb
-        f.write("S0 Logs\n\n")
-
-    with open(LOG_S1, 'w', encoding="UTF-8") as f:  # vb
-        f.write("S1 Logs\n\n")
-
-    with open(LOG_S2, 'w', encoding="UTF-8") as f:  # vb
-        f.write("S2 Logs\n\n")
-
-    with open(LOG_S3, 'w', encoding="UTF-8") as f:  # vb
-        f.write("S3 Logs\n\n")
-
-    #Governance Logs
-    with open(LOG_G0, 'w', encoding="UTF-8") as f:  # vb
-        f.write("G0 Logs\n\n")
-
-    with open(LOG_G1, 'w', encoding="UTF-8") as f:  # vb
-        f.write("G1 Logs\n\n")
-
-    with open(LOG_G2, 'w', encoding="UTF-8") as f:  # vb
-        f.write("G2 Logs\n\n")
-
-    with open(LOG_G3, 'w', encoding="UTF-8") as f:  # vb
-        f.write("G3 Logs\n\n")
-
-
-def add_to_log_file(file_name, sentence):
-
-    sentence.encode('utf-8', 'replace').decode()
-
-    if(file_name == "SKIP"):
-        with open(LOG_SENTENCES_NOT_INCLUDED, 'a', encoding="UTF-8") as f:  # vb
-            f.write(sentence + "\n\n")
-
-    # Environmental Logs
-    if(file_name == "E0"):
-        with open(LOG_E0, 'a', encoding="UTF-8") as f:  # vb
-            f.write(sentence + "\n\n")
-
-    if(file_name == "E1"):
-        with open(LOG_E1, 'a', encoding="UTF-8") as f:  # vb
-            f.write(sentence + "\n\n")
-
-    if(file_name == "E2"):
-        with open(LOG_E2, 'a', encoding="UTF-8") as f:  # vb
-            f.write(sentence + "\n\n")
-
-    if(file_name == "E3"):
-        with open(LOG_E3, 'a', encoding="UTF-8") as f:  # vb
-            f.write(sentence + "\n\n")
-
-    # Social Logs
-    if (file_name == "S0"):
-        with open(LOG_S0, 'a', encoding="UTF-8") as f:  # vb
-            f.write(sentence + "\n\n")
-
-    if (file_name == "S1"):
-        with open(LOG_S1, 'a', encoding="UTF-8") as f:  # vb
-            f.write(sentence + "\n\n")
-
-    if (file_name == "S2"):
-        with open(LOG_S2, 'a', encoding="UTF-8") as f:  # vb
-            f.write(sentence + "\n\n")
-
-    if (file_name == "S3"):
-        with open(LOG_S3, 'a', encoding="UTF-8") as f:  # vb
-            f.write(sentence + "\n\n")
-
-    # Governance Logs
-    if (file_name == "G0"):
-        with open(LOG_G0, 'a', encoding="UTF-8") as f:  # vb
-            f.write(sentence + "\n\n")
-
-    if (file_name == "G1"):
-        with open(LOG_G1, 'a', encoding="UTF-8") as f:  # vb
-            f.write(sentence + "\n\n")
-
-    if (file_name == "G2"):
-        with open(LOG_G2, 'a', encoding="UTF-8") as f:  # vb
-            f.write(sentence + "\n\n")
-
-    if (file_name == "G3"):
-        with open(LOG_G3, 'a', encoding="UTF-8") as f:  # vb
-            f.write(sentence + "\n\n")
-
-
-def add_to_all_log_files(sentence):
-    sentence.encode('utf-8', 'replace').decode()
-
-    for file_name in LIST_OF_LOG_FILES:
-        with open(file_name, 'a', encoding="UTF-8") as f:  # vb
-            f.write(sentence + "\n\n")
-
-    with open(LOG_SENTENCES_NOT_INCLUDED, 'a', encoding="UTF-8") as f:  # vb
-        f.write(sentence + "\n\n")
 
 def extract_pdf(file, file_params):
 
@@ -558,8 +419,6 @@ def extract_pdf(file, file_params):
         for sentence in page:
             file_sentences_list.append(sentence)
 
-
-
     return file_sentences_list
 
 def if_string_has_number(input_string):
@@ -569,13 +428,10 @@ def if_string_has_currency(input_string):
 
     input_string = input_string.lower()
     input_string = re.sub('([+-]?(?=\.\d|\d)(?:\d+)?(?:\.?\d*))(?:[Ee]([+-]?\d+))?', r' \1 ', input_string)
-    # input_string = input_string.replace("eurofins", " ")
-    # input_string = input_string.replace("eurazeo", " ")
-    # input_string = input_string.replace("european", " ")
     input_string = input_string.replace("$ontent", "content")
     input_string = input_string.replace("$'%", " ")
 
-    list_of_words = input_string.split() #vb
+    list_of_words = input_string.split()
     for i, word in enumerate(list_of_words):
         if word[0: 3] == "eur" and len(word) > 3:
             list_of_words[i] = re.sub("eur", "", word)
@@ -591,8 +447,6 @@ def if_string_has_currency(input_string):
     return currency_found
 
 if __name__ == '__main__':
-
-    create_log_files()
 
     if os.path.exists(OUTPUT_EXCEL_FILE_NAME):
         try:
@@ -617,10 +471,8 @@ if __name__ == '__main__':
             if file_to_find["file_name"] == file:
                 file_params.append(file_to_find)
 
-
         log_string = f"{i+1}. Scanning {file} ... "
         print(log_string, end="")
-        add_to_all_log_files(log_string)
 
         try:
             extracted_sentences = extract_pdf(file, file_params)
@@ -657,16 +509,12 @@ if __name__ == '__main__':
 
                 if keywords_environmental_in_sentence == False:
                     item["E"] = 0
-                    add_to_log_file("E0", sentence)
 
                 if keywords_social_in_sentence == False:
                     item["S"] = 0
-                    add_to_log_file("S0", sentence)
 
                 if keywords_governance_in_sentence == False:
                     item["G"] = 0
-                    add_to_log_file("G0", sentence)
-
 
                 #if keyword accurance in sentance occured:
                 string_has_number = False
@@ -685,12 +533,6 @@ if __name__ == '__main__':
                     if string_has_number and string_has_currency:
                         item["E"] = 3
 
-                    # if "" in sentence:
-                    #     add_to_log_file("SKIP", sentence)
-                    #     item["E"] = 1
-
-                    add_to_log_file(f"E{item['E']}", sentence)
-
                 if keywords_social_in_sentence == True:
                     item["S"] = 1
 
@@ -700,12 +542,6 @@ if __name__ == '__main__':
                     if string_has_number and string_has_currency:
                         item["S"] = 3
 
-                    # if "" in sentence:
-                    #     add_to_log_file("SKIP", sentence)
-                    #     item["S"] = 1
-
-                    add_to_log_file(f"S{item['S']}", sentence)
-
                 if  keywords_governance_in_sentence == True:
                     item["G"] = 1
 
@@ -714,12 +550,6 @@ if __name__ == '__main__':
 
                     if string_has_number and string_has_currency:
                         item["G"] = 3
-
-                    # if "" in sentence:
-                    #     add_to_log_file("SKIP", sentence)
-                    #     item["G"] = 1
-
-                    add_to_log_file(f"G{item['G']}", sentence)
 
             e0_total = 0
             e1_total = 0
@@ -775,17 +605,11 @@ if __name__ == '__main__':
             log_string += "success"
             print("success")
 
-            with open(LOG_FILE_NAME, 'a', encoding="UTF-8") as f:
-                f.write(log_string + "\n")
-
         except Exception as e:
             log_string += "error"
             print("error")
 
             error_counter += 1
-
-            with open(LOG_FILE_NAME, 'a', encoding="UTF-8") as f:
-                f.write(log_string + "\n")
 
     #end of files loop
     try:
@@ -797,17 +621,7 @@ if __name__ == '__main__':
         df.to_excel(OUTPUT_EXCEL_FILE_NAME, index=False)
     except:
 
-        with open(LOG_FILE_NAME, 'a', encoding="UTF-8") as f:
-            f.write("Error creating result excel file" + "\n")
-
         print("Error creating result excel file")
         raise Exception("Error creating result excel file")
 
-    with open(LOG_FILE_NAME, 'a', encoding="UTF-8") as f:
-        f.write(f"\nJob finished: files processed={len(files)}, errors={error_counter} (ctrl+f search for 'error')")
-
     print(f"\nJob finished: files processed={len(files)}, errors={error_counter}")
-
-
-
-
